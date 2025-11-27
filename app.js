@@ -603,11 +603,17 @@ function resizeCanvas() {
 }
 
 function setupEventListeners() {
+    // Mouse events
     app.canvas.addEventListener('mousedown', onMouseDown);
     app.canvas.addEventListener('mousemove', onMouseMove);
     app.canvas.addEventListener('mouseup', onMouseUp);
     app.canvas.addEventListener('click', onCanvasClick);
     app.canvas.addEventListener('dblclick', onCanvasDoubleClick);
+
+    // Touch events for mobile/tablet support
+    app.canvas.addEventListener('touchstart', onTouchStart, { passive: false });
+    app.canvas.addEventListener('touchmove', onTouchMove, { passive: false });
+    app.canvas.addEventListener('touchend', onTouchEnd, { passive: false });
 
     document.getElementById('reset-btn').addEventListener('click', resetAtoms);
     document.getElementById('clear-btn').addEventListener('click', clearAll);
@@ -691,7 +697,7 @@ function onMouseMove(e) {
     app.mousePos.y = e.clientY - rect.top;
 }
 
-function onMouseUp(e) {
+function onMouseUp() {
     app.atoms.forEach(atom => atom.isDragging = false);
     app.selectedAtom = null;
 
@@ -701,6 +707,82 @@ function onMouseUp(e) {
     setTimeout(() => {
         checkAllReactions();
     }, 50); // 50ms delay to allow atoms to settle
+}
+
+// Touch event handlers for mobile/tablet support
+function getTouchPos(e) {
+    const rect = app.canvas.getBoundingClientRect();
+    const touch = e.touches[0] || e.changedTouches[0];
+    return {
+        x: touch.clientX - rect.left,
+        y: touch.clientY - rect.top
+    };
+}
+
+function onTouchStart(e) {
+    e.preventDefault();
+    const pos = getTouchPos(e);
+
+    // Check atoms
+    for (let atom of app.atoms) {
+        if (!atom.moleculeId && atom.contains(pos.x, pos.y)) {
+            atom.isDragging = true;
+            app.selectedAtom = atom;
+            app.mousePos.x = pos.x;
+            app.mousePos.y = pos.y;
+            return;
+        }
+    }
+
+    // Check molecules
+    for (let molecule of app.molecules) {
+        if (molecule.contains(pos.x, pos.y)) {
+            molecule.atoms.forEach(atom => atom.isDragging = true);
+            app.mousePos.x = pos.x;
+            app.mousePos.y = pos.y;
+            return;
+        }
+    }
+}
+
+function onTouchMove(e) {
+    e.preventDefault();
+    const pos = getTouchPos(e);
+    app.mousePos.x = pos.x;
+    app.mousePos.y = pos.y;
+}
+
+function onTouchEnd(e) {
+    e.preventDefault();
+    const pos = getTouchPos(e);
+
+    // Check if it was a tap (no drag) to show info
+    const wasDragging = app.atoms.some(atom => atom.isDragging);
+
+    app.atoms.forEach(atom => atom.isDragging = false);
+    app.selectedAtom = null;
+
+    // Force immediate reaction check after a tiny delay
+    app.lastReactionCheck = 0;
+    setTimeout(() => {
+        checkAllReactions();
+    }, 50);
+
+    // If it wasn't a drag, treat as tap to show info
+    if (!wasDragging) {
+        for (let molecule of app.molecules) {
+            if (molecule.contains(pos.x, pos.y)) {
+                showMoleculeInfo(molecule.data);
+                return;
+            }
+        }
+        for (let atom of app.atoms) {
+            if (atom.contains(pos.x, pos.y)) {
+                showElementInfo(atom);
+                return;
+            }
+        }
+    }
 }
 
 function checkAllReactions() {
