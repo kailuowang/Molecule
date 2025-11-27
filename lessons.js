@@ -987,5 +987,390 @@ const LESSONS = [
                 image: "🛡️"
             }
         ]
+    },
+    {
+        id: 10,
+        name: "Lesson 10: Smells & Flavors",
+        description: "Explore the organic acids and esters that give foods and products their sour tastes and fruity smells.",
+        atoms: [
+            { element: "C", count: 12, color: "#4A4A4A", name: "Carbon" },
+            { element: "H", count: 24, color: "#FFB6C1", name: "Hydrogen" },
+            { element: "O", count: 11, color: "#FF6B6B", name: "Oxygen" }
+        ],
+        molecules: [
+            {
+                name: "Formic Acid",
+                formula: "HCOOH",
+                composition: { C: 1, H: 2, O: 2 },
+                // indices: 0:C, 1:H, 2:H, 3:O, 4:O
+                // H–C(=O)–O–H
+                bonds: [[0, 1], [0, 3], [0, 4], [4, 2]],
+                description: "Formic acid is the simplest carboxylic acid and is found in ant stings and nettle plants. Its name comes from the Latin word for ant, “formica,” because it was first isolated from crushed ants. Even though it’s a simple molecule, it packs a strong, sharp bite and is used in leather tanning, rubber production, and as a preservative.",
+                properties: [
+                    "Simplest carboxylic acid (1 carbon)",
+                    "Found in ant venom and stinging nettles",
+                    "Sharp, pungent, irritating smell",
+                    "Can cause burning sensation on skin",
+                    "Used in leather tanning and textile dyeing",
+                    "Acts as a preservative and antibacterial agent",
+                    "Stronger acid than acetic acid (vinegar acid)",
+                    "Occurs naturally in some fruits and bee venom",
+                    "Colorless liquid that mixes easily with water",
+                    "Important building block in organic chemistry"
+                ],
+                image: "🐜"
+            },
+            {
+                name: "Acetic Acid",
+                formula: "CH₃COOH",
+                composition: { C: 2, H: 4, O: 2 },
+                // indices: 0:C,1:C,2:H,3:H,4:H,5:H,6:O,7:O
+                // CH3–COOH
+                bonds: [[0, 1], [0, 2], [0, 3], [0, 4], [1, 6], [1, 7], [7, 5]],
+                description: "Acetic acid is what gives vinegar its sour taste and sharp smell. When alcohol is exposed to oxygen and special bacteria, it slowly turns into acetic acid – this is how wine can turn into vinegar. In your kitchen, vinegar is mostly a weak solution of acetic acid in water.",
+                properties: [
+                    "Main acid in household vinegar (4–8%)",
+                    "Sour taste and sharp, pickling smell",
+                    "Formed when alcohol is oxidized by bacteria",
+                    "Used in pickling and food preservation",
+                    "Weak acid compared to strong mineral acids",
+                    "Pure form is called glacial acetic acid",
+                    "Colorless liquid that can freeze into crystals",
+                    "Used to make plastics, fibers, and solvents",
+                    "Naturally produced in fermentation processes",
+                    "Important flavoring and preservative in foods"
+                ],
+                image: "🥗"
+            },
+            {
+                name: "Methyl Formate",
+                formula: "HCOOCH₃",
+                composition: { C: 2, H: 4, O: 2 },
+                // indices: 0:C,1:C,2:H,3:H,4:H,5:H,6:O,7:O
+                // H–COO–CH3 (formate ester)
+                bonds: [[0, 2], [0, 6], [0, 7], [6, 1], [1, 3], [1, 4], [1, 5]],
+                description: "Methyl formate is an ester with a light, pleasant smell. Esters are famous for their fruity and floral aromas and are widely used in perfumes and flavorings. Methyl formate is also used as a solvent and in making other chemicals, showing how a small change in structure can give a molecule very different uses than the acids and alcohols it comes from.",
+                properties: [
+                    "Member of the ester family (acid + alcohol)",
+                    "Has a sweet, pleasant, slightly fruity odor",
+                    "Used as a solvent in industry",
+                    "Helps make other chemicals and resins",
+                    "Lower boiling point than similar acids or alcohols",
+                    "Shows how structure changes smell and properties",
+                    "Can be found in some flavor and fragrance blends",
+                    "Colorless, flammable liquid",
+                    "Evaporates easily (volatile organic compound)",
+                    "Illustrates the idea of functional groups in organic chemistry"
+                ],
+                image: "🍓"
+            },
+            {
+                name: "Ethyl Acetate",
+                formula: "CH₃COOCH₂CH₃",
+                composition: { C: 4, H: 8, O: 2 },
+                // indices: 0:C,1:C,2:C,3:C,4:H,5:H,6:H,7:H,8:H,9:H,10:H,11:H,12:O,13:O
+                // CH3–COO–CH2–CH3
+                bonds: [
+                    [0, 1],
+                    [0, 4], [0, 5], [0, 6],
+                    [1, 12], [1, 13],
+                    [12, 2],
+                    [2, 3],
+                    [2, 7], [2, 8],
+                    [3, 9], [3, 10], [3, 11]
+                ],
+                description: "Ethyl acetate is a fruity-smelling ester used as a solvent in nail polish remover, glues, and inks. It’s also naturally present in fruits and fermented foods, contributing to their pleasant aromas. Because it evaporates quickly and has a relatively low toxicity, it’s a popular solvent in laboratories and industry.",
+                properties: [
+                    "Fruity, sweet smell (often like pears or bananas)",
+                    "Common solvent in nail polish remover and glues",
+                    "Found naturally in some fruits and wines",
+                    "Evaporates quickly (volatile organic compound)",
+                    "Relatively low toxicity compared to many solvents",
+                    "Used in inks, coatings, and printing",
+                    "Helps extract flavors and fragrances from plants",
+                    "Classic example of an ester (acid + alcohol reaction)",
+                    "Colorless, flammable liquid",
+                    "Shows how esters contribute to food aromas"
+                ],
+                image: "💅"
+            },
+            {
+                name: "Lactic Acid",
+                formula: "C₃H₆O₃",
+                composition: { C: 3, H: 6, O: 3 },
+                // indices: 0:C,1:C,2:C,3:H,4:H,5:H,6:H,7:H,8:H,9:O,10:O,11:O
+                // CH3–CH(OH)–COOH
+                bonds: [
+                    [0, 1],
+                    [0, 3], [0, 4], [0, 5],
+                    [1, 6],
+                    [1, 9],
+                    [9, 7],
+                    [1, 2],
+                    [2, 10],
+                    [2, 11],
+                    [11, 8]
+                ],
+                description: "Lactic acid is produced in your muscles during intense exercise and is responsible for the ‘burning’ feeling when you work out hard. It’s also found in yogurt, sourdough bread, and pickled vegetables, where it’s made by lactic acid bacteria. Lactic acid gives these foods their tangy flavor and helps preserve them.",
+                properties: [
+                    "Produced in muscles during intense exercise",
+                    "Contributes to the burning feeling in overworked muscles",
+                    "Made by bacteria in yogurt and fermented foods",
+                    "Gives sourdough, pickles, and kimchi their tang",
+                    "Acts as a mild preservative",
+                    "Exists in two mirror-image forms (L and D isomers)",
+                    "Used in biodegradable plastics (PLA)",
+                    "Colorless or pale yellow syrupy liquid",
+                    "Naturally found in sour milk and dairy products",
+                    "Important in biochemistry and food science"
+                ],
+                image: "🏃"
+            }
+            ]
+    },
+    {
+    id: 11,
+    name: "Lesson 11: Household Chemistry",
+    description: "Connect everyday cleaners and disinfectants to the molecules that make them work.",
+    atoms: [
+        { element: "H", count: 14, color: "#FFB6C1", name: "Hydrogen" },
+        { element: "O", count: 10, color: "#FF6B6B", name: "Oxygen" },
+        { element: "N", count: 4, color: "#4169E1", name: "Nitrogen" },
+        { element: "Na", count: 6, color: "#FFA500", name: "Sodium" },
+        { element: "Cl", count: 4, color: "#90EE90", name: "Chlorine" },
+        { element: "C", count: 4, color: "#4A4A4A", name: "Carbon" }
+    ],
+    molecules: [
+        {
+            name: "Ammonia",
+            formula: "NH₃",
+            composition: { N: 1, H: 3 },
+            // indices: 0:N,1:H,2:H,3:H
+            bonds: [[0, 1], [0, 2], [0, 3]],
+            description: "Ammonia is a strong-smelling gas used in many glass and surface cleaners. It cuts through grease and dirt and evaporates quickly, leaving surfaces streak-free. In nature, ammonia is produced when organic matter breaks down and is a key part of the nitrogen cycle.",
+            properties: [
+                "Sharp, irritating smell (common in cleaners)",
+                "Effective at cutting grease and dirt",
+                "Used in glass and floor cleaners",
+                "Dissolves easily in water to form a basic solution",
+                "Produced naturally from decaying organic matter",
+                "Important nitrogen source for plants (fertilizers)",
+                "Colorless gas at room temperature",
+                "Less dense than air and rises upward",
+                "Corrosive in high concentrations",
+                "Building block for many other nitrogen compounds"
+            ],
+            image: "🧼"
+        },
+        {
+            name: "Hydrogen Peroxide",
+            formula: "H₂O₂",
+            composition: { H: 2, O: 2 },
+            // indices: 0:H,1:H,2:O,3:O
+            // H–O–O–H
+            bonds: [[0, 2], [2, 3], [3, 1]],
+            description: "Hydrogen peroxide is a mild disinfectant you might have at home in a brown bottle. When it touches blood or germs, it breaks down into water and oxygen, making bubbles and foam. That extra oxygen helps kill bacteria and clean wounds or surfaces.",
+            properties: [
+                "Common household disinfectant and antiseptic",
+                "Bubbles when cleaning cuts and scrapes",
+                "Breaks down into water and oxygen",
+                "Stored in dark bottles to prevent decomposition",
+                "Used to bleach hair and fabrics",
+                "Can disinfect surfaces and toothbrushes",
+                "Stronger, concentrated solutions are powerful oxidizers",
+                "Colorless liquid that looks like water",
+                "Used in some environmentally friendly cleaners",
+                "Oxygen release makes it useful for cleaning and stain removal"
+            ],
+            image: "🩹"
+        },
+        {
+            name: "Sodium Hypochlorite",
+            formula: "NaClO",
+            composition: { Na: 1, Cl: 1, O: 1 },
+            // indices: 0:Na,1:Cl,2:O
+            // approximate: Na–Cl–O
+            bonds: [[0, 1], [1, 2]],
+            description: "Sodium hypochlorite is the active ingredient in household bleach. It is a very strong oxidizing agent that kills bacteria, viruses, and fungi and removes stains by breaking apart colored molecules. Because it’s so reactive, it must be used carefully and never mixed with acids or ammonia.",
+            properties: [
+                "Active ingredient in chlorine bleach",
+                "Powerful disinfectant and stain remover",
+                "Destroys bacteria, viruses, and fungi",
+                "Breaks down color molecules in stains and dyes",
+                "Gives bleach its strong chlorine-like odor",
+                "Must not be mixed with acids or ammonia (toxic gases)",
+                "Used to whiten fabrics and clean bathrooms",
+                "Often used to disinfect drinking water in emergencies",
+                "Corrosive to skin and metals in concentrated form",
+                "Stored in opaque containers to reduce decomposition"
+            ],
+            image: "🧴"
+        },
+        {
+            name: "Sodium Bicarbonate",
+            formula: "NaHCO₃",
+            composition: { Na: 1, H: 1, C: 1, O: 3 },
+            // indices: 0:Na,1:H,2:C,3:O,4:O,5:O
+            // H–O–C(=O)–O⁻ with Na⁺ nearby (simplified connectivity)
+            bonds: [[2, 3], [2, 4], [2, 5], [3, 1], [0, 4]],
+            description: "Sodium bicarbonate, better known as baking soda, is a gentle base used for baking, cleaning, and deodorizing. In baking, it reacts with acids like vinegar or lemon juice to release carbon dioxide gas that makes dough rise. As a cleaner, it’s mild enough to scrub surfaces without scratching them.",
+            properties: [
+                "Commonly known as baking soda",
+                "Mild base that neutralizes acids",
+                "Releases CO₂ gas when mixed with acid (makes dough rise)",
+                "Used to deodorize refrigerators and carpets",
+                "Gentle abrasive for cleaning sinks and pans",
+                "Safe enough to be used in some toothpaste",
+                "Helps relieve heartburn when dissolved in water",
+                "Appears as a white crystalline powder",
+                "Used in fire extinguishers for small grease fires",
+                "Key ingredient in classic volcano science projects"
+            ],
+            image: "🥄"
+        },
+        {
+            name: "Sodium Carbonate",
+            formula: "Na₂CO₃",
+            composition: { Na: 2, C: 1, O: 3 },
+            // indices: 0:Na,1:Na,2:C,3:O,4:O,5:O
+            // CO3 with two Na⁺ nearby (simplified)
+            bonds: [[2, 3], [2, 4], [2, 5], [0, 3], [1, 4]],
+            description: "Sodium carbonate, also called washing soda or soda ash, is a stronger base than baking soda and is used in laundry detergents and dishwasher tablets. It helps remove grease and stains by reacting with fats and making water more effective at cleaning.",
+            properties: [
+                "Also called washing soda or soda ash",
+                "Stronger base than baking soda",
+                "Used in laundry detergents and dishwasher tablets",
+                "Helps soften hard water for better cleaning",
+                "Reacts with grease and fats to break them down",
+                "Appears as a white granular or powdery solid",
+                "Used in glass and soap manufacturing",
+                "Can irritate skin and eyes in concentrated form",
+                "Used to adjust pH in pools and aquariums",
+                "Important industrial chemical for cleaning and manufacturing"
+            ],
+            image: "🧺"
+        }
+    ]
+    },
+    {
+    id: 12,
+    name: "Lesson 12: Environmental Chemistry",
+    description: "See how small molecules in the air can lead to pollution, smog, and acid rain.",
+    atoms: [
+        { element: "S", count: 4, color: "#FFFF00", name: "Sulfur" },
+        { element: "N", count: 4, color: "#4169E1", name: "Nitrogen" },
+        { element: "O", count: 14, color: "#FF6B6B", name: "Oxygen" },
+        { element: "H", count: 6, color: "#FFB6C1", name: "Hydrogen" }
+    ],
+    molecules: [
+        {
+            name: "Sulfur Dioxide",
+            formula: "SO₂",
+            composition: { S: 1, O: 2 },
+            // indices: 0:S,1:O,2:O
+            bonds: [[0, 1], [0, 2]],
+            description: "Sulfur dioxide is a sharp, choking gas released by volcanoes and by burning coal and oil that contain sulfur. In the atmosphere it can be converted into sulfuric acid, contributing to acid rain that damages forests, lakes, and buildings.",
+            properties: [
+                "Colorless gas with sharp, suffocating smell",
+                "Produced by volcanoes and burning fossil fuels",
+                "Major contributor to acid rain",
+                "Irritates lungs and can trigger asthma",
+                "Dissolves in water to form acidic solutions",
+                "Used in small amounts to preserve dried fruits and wine",
+                "Heavier than air, can accumulate in low areas",
+                "Controlled in power plants by scrubber systems",
+                "Corrosive to metals and stone over time",
+                "Important example of how pollution transforms in the atmosphere"
+            ],
+            image: "🌋"
+        },
+        {
+            name: "Nitrogen Dioxide",
+            formula: "NO₂",
+            composition: { N: 1, O: 2 },
+            // indices: 0:N,1:O,2:O
+            bonds: [[0, 1], [0, 2]],
+            description: "Nitrogen dioxide is a reddish-brown gas that forms from car engines and power plants. It’s a key ingredient in photochemical smog and can react with water in the atmosphere to form nitric acid, another component of acid rain.",
+            properties: [
+                "Reddish-brown poisonous gas",
+                "Sharp, biting odor",
+                "Formed from nitrogen oxides in car exhaust",
+                "Major contributor to urban smog",
+                "Irritates lungs and reduces air quality",
+                "Can react with water to form nitric acid (acid rain)",
+                "Absorbs sunlight and drives photochemical reactions",
+                "Often monitored as a key air pollutant (NOx)",
+                "More reactive than nitrogen gas (N₂)",
+                "Helps illustrate the link between traffic and air quality"
+            ],
+            image: "🚗"
+        },
+        {
+            name: "Nitric Acid",
+            formula: "HNO₃",
+            composition: { H: 1, N: 1, O: 3 },
+            // indices: 0:H,1:N,2:O,3:O,4:O
+            // HO–N(=O)2 simplified as N connected to three O, one O–H
+            bonds: [[1, 2], [1, 3], [1, 4], [2, 0]],
+            description: "Nitric acid is a strong acid formed in the atmosphere from nitrogen oxides and water, and it is one of the acids in acid rain. In industry, concentrated nitric acid is used to make fertilizers, explosives, and many other chemicals.",
+            properties: [
+                "Strong mineral acid",
+                "Forms in the atmosphere from NOx and water",
+                "Important component of acid rain",
+                "Highly corrosive to metals and skin",
+                "Used to make nitrate fertilizers",
+                "Key reactant in making explosives (like TNT)",
+                "Colorless to slightly yellow liquid",
+                "Can release toxic fumes (nitrogen dioxide) when decomposing",
+                "Stored and handled with special safety equipment",
+                "Shows how air pollution can turn into strong acids"
+            ],
+            image: "🌧️"
+        },
+        {
+            name: "Sulfuric Acid",
+            formula: "H₂SO₄",
+            composition: { H: 2, S: 1, O: 4 },
+            // indices: 0:H,1:H,2:S,3:O,4:O,5:O,6:O
+            // two OH groups + two additional S–O bonds
+            bonds: [[0, 3], [2, 3], [1, 4], [2, 4], [2, 5], [2, 6]],
+            description: "Sulfuric acid is a very strong acid formed from sulfur dioxide and water in the atmosphere, making it a major part of acid rain. Industrially, it is one of the most produced chemicals in the world and is used in car batteries, fertilizer production, and many manufacturing processes.",
+            properties: [
+                "One of the strongest common acids",
+                "Major component of acid rain (from SO₂ + water)",
+                "Extremely corrosive to skin, metals, and organic matter",
+                "Used in car lead-acid batteries",
+                "Essential for making phosphate fertilizers",
+                "Colorless, oily liquid with high density",
+                "Generates intense heat when mixed with water",
+                "Used in petroleum refining and metal processing",
+                "Production is a key indicator of industrial activity",
+                "Shows how air pollutants can form very strong acids"
+            ],
+            image: "🏭"
+        },
+        {
+            name: "Ozone (Ground Level)",
+            formula: "O₃",
+            composition: { O: 3 },
+            // indices: 0:O,1:O,2:O
+            bonds: [[0, 1], [1, 2]],
+            description: "Ozone high in the stratosphere protects us from ultraviolet radiation, but at ground level it is a harmful air pollutant. Ground-level ozone forms when sunlight reacts with nitrogen oxides and volatile organic compounds in the air, creating smog that can irritate lungs and damage plants.",
+            properties: [
+                "Same molecule as protective ozone layer, but in wrong place",
+                "Forms near the ground from NOx and organic vapors in sunlight",
+                "Major component of photochemical smog",
+                "Irritates eyes, throat, and lungs",
+                "Damages leaves and reduces crop yields",
+                "Strong oxidizing agent",
+                "Has a sharp, clean smell (often after lightning storms)",
+                "Short-lived, but constantly produced on sunny polluted days",
+                "Monitored in air quality indexes (AQI)",
+                "Shows that the same molecule can be helpful high up and harmful near the ground"
+            ],
+            image: "🌫️"
+        }
+    ]
     }
+
 ];
