@@ -563,12 +563,18 @@ const LESSONS = [
                 formula: "CH₃OH",
                 composition: { C: 1, H: 4, O: 1 },
                 bonds: [[0, 1], [0, 2], [0, 3], [0, 4], [4, 5]],
-                description: "Methanol is the simplest alcohol, used as fuel and solvent.",
+                description: "Methanol is the simplest alcohol, also called wood alcohol because it was once made by heating wood. It's a clear liquid that looks and smells somewhat like drinking alcohol, but it's extremely poisonous - even small amounts can cause blindness or death! Methanol is used as antifreeze, fuel for racing cars, and to make other chemicals like formaldehyde. It's also being developed as a cleaner-burning fuel alternative to gasoline.",
                 properties: [
-                    "Colorless liquid",
-                    "Toxic if ingested",
-                    "Used as fuel",
-                    "Makes formaldehyde"
+                    "Colorless liquid with faint alcohol smell",
+                    "Highly toxic - causes blindness and death",
+                    "Used as racing car fuel and antifreeze",
+                    "Simplest alcohol (only 1 carbon)",
+                    "Burns with nearly invisible flame",
+                    "Made from natural gas or biomass",
+                    "Used to make formaldehyde and plastics",
+                    "Also called wood alcohol or methyl alcohol",
+                    "Lighter than water",
+                    "Can be used in fuel cells for electricity"
                 ],
                 image: "🧴"
             },
@@ -577,12 +583,18 @@ const LESSONS = [
                 formula: "C₂H₅OH",
                 composition: { C: 2, H: 6, O: 1 },
                 bonds: [[0, 1], [0, 2], [0, 3], [0, 6], [6, 4], [6, 5], [6, 7], [7, 8]],
-                description: "Ethanol is drinking alcohol, also used as fuel and disinfectant.",
+                description: "Ethanol is the type of alcohol found in beer, wine, and spirits that adults drink. It's made by yeast fermenting sugars from fruits, grains, or vegetables. Besides being in alcoholic beverages, ethanol is used as hand sanitizer (kills germs), biofuel (E85 gas), and in medicines. Pure ethanol is colorless with a characteristic smell. While safer than methanol, drinking too much ethanol is still dangerous and affects the brain and body.",
                 properties: [
-                    "Found in alcoholic drinks",
-                    "Disinfectant",
-                    "Biofuel",
-                    "Made by fermentation"
+                    "Alcohol found in alcoholic beverages",
+                    "Powerful disinfectant - kills bacteria and viruses",
+                    "Made by fermentation of sugars by yeast",
+                    "Used as biofuel (ethanol gas blends)",
+                    "Colorless liquid with characteristic odor",
+                    "Burns with blue flame",
+                    "Main ingredient in hand sanitizer",
+                    "Can be distilled from corn, sugarcane, or wheat",
+                    "Also called grain alcohol or ethyl alcohol",
+                    "Toxic in large amounts - affects brain function"
                 ],
                 image: "🍷"
             },
@@ -591,12 +603,18 @@ const LESSONS = [
                 formula: "CH₃OCH₃",
                 composition: { C: 2, H: 6, O: 1 },
                 bonds: [[0, 1], [0, 2], [0, 3], [0, 6], [6, 7], [7, 4], [7, 5], [7, 8]],
-                description: "Dimethyl ether is used as a propellant in aerosol sprays.",
+                description: "Dimethyl ether (DME) is an interesting molecule - it has the same atoms as ethanol (C₂H₆O) but they're arranged differently, making it a gas instead of a liquid! It has a slightly sweet smell and is used as a propellant in aerosol spray cans like hairspray and deodorant. DME is also being developed as a clean diesel fuel alternative because it burns without producing soot. It's non-toxic and biodegradable, making it environmentally friendly.",
                 properties: [
-                    "Colorless gas",
-                    "Used in aerosols",
-                    "Alternative fuel",
-                    "Sweet smell"
+                    "Colorless gas at room temperature",
+                    "Propellant in aerosol spray cans",
+                    "Slightly sweet, ether-like smell",
+                    "Same formula as ethanol, different structure (isomer)",
+                    "Being developed as clean diesel fuel",
+                    "Burns without producing soot",
+                    "Non-toxic and biodegradable",
+                    "Can be made from natural gas or biomass",
+                    "Used in refrigeration",
+                    "Environmentally friendly compared to CFCs"
                 ],
                 image: "💨"
             },
@@ -619,12 +637,18 @@ const LESSONS = [
                 formula: "CH₃COOH",
                 composition: { C: 2, H: 4, O: 2 },
                 bonds: [[0, 1], [0, 2], [0, 3], [0, 4], [4, 5], [4, 6], [6, 7]],
-                description: "Acetic acid gives vinegar its sour taste and smell.",
+                description: "Acetic acid is what gives vinegar its sour taste and sharp smell! When you eat vinegar on your salad or fish and chips, you're tasting acetic acid. It's made by bacteria fermenting alcohol in a two-step process - first yeast makes alcohol from sugar, then special bacteria convert the alcohol into acetic acid. Vinegar is typically 4-8% acetic acid mixed with water. Pure acetic acid is called glacial acetic acid because it freezes into ice-like crystals.",
                 properties: [
-                    "Main component of vinegar",
-                    "Sour taste",
-                    "Preservative",
-                    "Weak acid"
+                    "Main component of vinegar (4-8% solution)",
+                    "Sour, tart taste and pungent smell",
+                    "Natural food preservative and flavoring",
+                    "Weak acid compared to strong acids",
+                    "Made by bacterial fermentation of alcohol",
+                    "Pure form called glacial acetic acid",
+                    "Colorless liquid",
+                    "Used in pickling and food preservation",
+                    "Can be produced by wood distillation",
+                    "Also called ethanoic acid"
                 ],
                 image: "🥗"
             }
@@ -646,12 +670,18 @@ const LESSONS = [
                 formula: "PH₃",
                 composition: { P: 1, H: 3 },
                 bonds: [[0, 3], [1, 3], [2, 3]],
-                description: "Phosphine is a toxic gas with a fishy smell.",
+                description: "Phosphine is a highly toxic gas with a distinctive fishy or garlic-like smell. It's similar in structure to ammonia (NH₃) but with phosphorus instead of nitrogen. Phosphine occurs naturally in swamps from decaying organic matter and some scientists think it might even exist on Venus! It's used as a fumigant to kill pests in stored grain. Recently, scientists discovered phosphine in Venus's atmosphere, which sparked excitement because it could be a sign of life!",
                 properties: [
-                    "Colorless gas",
-                    "Fishy smell",
-                    "Highly toxic",
-                    "Used as fumigant"
+                    "Colorless, highly toxic gas",
+                    "Fishy or garlic-like smell",
+                    "Pyramid shape like ammonia",
+                    "Used as fumigant for grain storage",
+                    "Spontaneously flammable in air",
+                    "Found naturally in swamps",
+                    "Detected in Venus's atmosphere (possible biosignature)",
+                    "More toxic than ammonia",
+                    "Heavier than air",
+                    "Reacts with oxygen to form phosphoric acid"
                 ],
                 image: "☠️"
             },
@@ -660,12 +690,18 @@ const LESSONS = [
                 formula: "H₃PO₄",
                 composition: { H: 3, P: 1, O: 4 },
                 bonds: [[0, 4], [1, 4], [2, 4], [4, 5], [4, 6], [4, 7], [5, 3]],
-                description: "Phosphoric acid is used in soft drinks and fertilizers.",
+                description: "Phosphoric acid is the tangy ingredient that gives cola drinks their sharp taste! It's a weak acid that's much safer than strong acids like sulfuric acid. Farmers use huge amounts of phosphoric acid to make fertilizers that help plants grow strong roots. It's also used to remove rust from metal and in many foods as a flavoring and preservative. Your body needs phosphorus (from phosphoric acid compounds) for strong bones and teeth!",
                 properties: [
-                    "Found in cola drinks",
-                    "Makes fertilizers",
-                    "Weak acid",
-                    "Rust remover"
+                    "Gives cola drinks their tangy taste",
+                    "Used to make phosphate fertilizers",
+                    "Weak acid - safer than strong acids",
+                    "Removes rust from metal surfaces",
+                    "Colorless, syrupy liquid",
+                    "Used as food additive (E338)",
+                    "Essential for bone and tooth formation",
+                    "Non-toxic in small amounts",
+                    "Used in dental cement",
+                    "Also called orthophosphoric acid"
                 ],
                 image: "🥤"
             },
@@ -674,12 +710,18 @@ const LESSONS = [
                 formula: "SiH₄",
                 composition: { Si: 1, H: 4 },
                 bonds: [[0, 1], [0, 2], [0, 3], [0, 4]],
-                description: "Silane is used in making computer chips and solar panels.",
+                description: "Silane is a crucial chemical for making computer chips and solar panels - the technology that powers our modern world! It's similar to methane (CH₄) but with silicon instead of carbon. Silane is used in a process called chemical vapor deposition to create ultra-pure silicon layers on computer chips. When silane decomposes, it deposits pure silicon - perfect for making the tiny circuits in smartphones and computers. It's highly flammable and will even catch fire spontaneously in air!",
                 properties: [
-                    "Colorless gas",
-                    "Highly flammable",
-                    "Makes silicon chips",
-                    "Used in electronics"
+                    "Colorless gas used in semiconductor industry",
+                    "Essential for making computer chips",
+                    "Used to manufacture solar panels",
+                    "Highly flammable - ignites spontaneously in air",
+                    "Similar structure to methane (CH₄)",
+                    "Decomposes to form pure silicon",
+                    "Tetrahedral molecular shape",
+                    "Used in chemical vapor deposition",
+                    "Enables modern electronics technology",
+                    "Sweet smell but highly toxic"
                 ],
                 image: "💻"
             },
@@ -688,12 +730,18 @@ const LESSONS = [
                 formula: "SiO₂",
                 composition: { Si: 1, O: 2 },
                 bonds: [[0, 1], [0, 2]],
-                description: "Silicon dioxide is quartz and sand, used to make glass.",
+                description: "Silicon dioxide is everywhere - it's sand on the beach, quartz crystals, and the main ingredient in glass! It's one of the most common compounds on Earth's surface. When you build a sandcastle, you're playing with billions of silicon dioxide molecules. Silicon dioxide is incredibly useful: it's melted to make glass for windows and bottles, used in concrete, and even in toothpaste to help clean your teeth. Quartz, amethyst, and citrine are all beautiful crystalline forms of silicon dioxide.",
                 properties: [
-                    "Main component of sand",
-                    "Forms quartz crystals",
-                    "Makes glass",
-                    "Very hard"
+                    "Main component of sand on beaches",
+                    "Forms beautiful quartz crystals",
+                    "Used to make glass and windows",
+                    "One of Earth's most abundant compounds",
+                    "Very hard - ranks 7 on hardness scale",
+                    "Melting point of 1710°C (3110°F)",
+                    "Used in concrete and ceramics",
+                    "Found in toothpaste as abrasive",
+                    "Forms gems: amethyst, citrine, agate",
+                    "Essential component of fiber optic cables"
                 ],
                 image: "🏖️"
             },
@@ -729,12 +777,18 @@ const LESSONS = [
                 formula: "XeF₂",
                 composition: { Xe: 1, F: 2 },
                 bonds: [[0, 1], [0, 2]],
-                description: "Xenon difluoride is one of the few noble gas compounds.",
+                description: "Xenon difluoride shocked the scientific world when it was discovered in 1962! For over 100 years, scientists thought noble gases like xenon couldn't form compounds because they were too \"stable\" and \"lazy\" to react. But xenon can be forced to bond with highly reactive fluorine! This colorless crystalline compound is used in the semiconductor industry to etch (carve) patterns on silicon chips. It's a remarkable example of how science constantly surprises us with new discoveries!",
                 properties: [
-                    "Colorless crystals",
-                    "Strong oxidizer",
-                    "Etches silicon",
-                    "Very reactive"
+                    "Colorless crystalline solid",
+                    "One of few stable noble gas compounds",
+                    "Strong oxidizing agent",
+                    "Used to etch silicon in chip manufacturing",
+                    "Linear molecular shape",
+                    "Discovered in 1962 - shocked scientists",
+                    "Reacts with water to release oxygen",
+                    "Made by heating xenon and fluorine together",
+                    "Used in chemical synthesis",
+                    "Proves noble gases aren't completely inert"
                 ],
                 image: "💎"
             },
@@ -743,12 +797,18 @@ const LESSONS = [
                 formula: "XeF₄",
                 composition: { Xe: 1, F: 4 },
                 bonds: [[0, 1], [0, 2], [0, 3], [0, 4]],
-                description: "Xenon tetrafluoride is a powerful fluorinating agent.",
+                description: "Xenon tetrafluoride is an even more impressive noble gas compound than XeF₂ - it has four fluorine atoms bonded to xenon! This colorless crystal has a beautiful square planar shape, with all four fluorines arranged in a perfect square around the xenon atom. It's a powerful fluorinating agent, meaning it can transfer fluorine atoms to other molecules. This is useful in making specialized chemicals, though it must be handled very carefully because it's extremely reactive.",
                 properties: [
-                    "Colorless crystals",
-                    "Very reactive",
-                    "Makes fluorocarbons",
-                    "Square planar shape"
+                    "Colorless crystalline solid",
+                    "Beautiful square planar molecular shape",
+                    "Very reactive fluorinating agent",
+                    "Used to make other fluorine compounds",
+                    "More reactive than XeF₂",
+                    "Decomposes when heated",
+                    "Can oxidize many substances",
+                    "Must be handled with extreme care",
+                    "Made at high pressure and temperature",
+                    "Example of expanded valence in noble gases"
                 ],
                 image: "⬜"
             },
@@ -757,12 +817,18 @@ const LESSONS = [
                 formula: "HF",
                 composition: { H: 1, F: 1 },
                 bonds: [[0, 1]],
-                description: "Hydrogen fluoride is used to etch glass and make Teflon.",
+                description: "Hydrogen fluoride is one of the few chemicals that can etch (eat away) glass! It's used to frost glass, create patterns on windows, and make non-stick Teflon coatings for frying pans. Hydrogen fluoride is extremely dangerous - it's highly corrosive and toxic, and can cause severe burns. Despite being dangerous, it's essential for many industrial processes. Fun fact: fluoride in toothpaste comes from hydrogen fluoride compounds, but in safe, tooth-protecting amounts!",
                 properties: [
-                    "Colorless gas",
-                    "Very corrosive",
-                    "Etches glass",
-                    "Makes Teflon"
+                    "Colorless gas or liquid",
+                    "Extremely corrosive - eats through glass",
+                    "Used to etch and frost glass",
+                    "Essential for making Teflon (non-stick coating)",
+                    "Very dangerous - causes severe chemical burns",
+                    "Forms strong hydrogen bonds",
+                    "Used to make fluoride in toothpaste",
+                    "Can dissolve most materials",
+                    "Stored in plastic or wax containers (not glass!)",
+                    "Used in petroleum refining"
                 ],
                 image: "🪟"
             },
@@ -771,12 +837,18 @@ const LESSONS = [
                 formula: "F₂",
                 composition: { F: 2 },
                 bonds: [[0, 1]],
-                description: "Fluorine is the most reactive element in the periodic table.",
+                description: "Fluorine gas holds the title of the most reactive element in the entire periodic table - it will react with almost anything, even gold and platinum! It's a pale yellow-green gas that's extremely toxic and corrosive. Fluorine is so reactive that it was incredibly difficult to isolate - it took scientists decades and even caused injuries and deaths during research. Despite being dangerous, fluorine compounds are everywhere: in toothpaste (fluoride), non-stick pans (Teflon), and refrigerants.",
                 properties: [
-                    "Pale yellow gas",
-                    "Most reactive element",
-                    "Very toxic",
-                    "Reacts with almost everything"
+                    "Pale yellow-green gas",
+                    "Most reactive element known",
+                    "Extremely toxic and corrosive",
+                    "Reacts with almost every element",
+                    "Can make water burn!",
+                    "Very difficult and dangerous to produce",
+                    "Used to make Teflon and refrigerants",
+                    "Fluoride compounds prevent tooth decay",
+                    "Lighter than air",
+                    "Strong oxidizing agent"
                 ],
                 image: "⚡"
             },
@@ -785,12 +857,18 @@ const LESSONS = [
                 formula: "OF₂",
                 composition: { O: 1, F: 2 },
                 bonds: [[0, 1], [0, 2]],
-                description: "Oxygen difluoride is a powerful oxidizer used in rocketry.",
+                description: "Oxygen difluoride is a strange and dangerous molecule where oxygen is bonded to fluorine - normally oxygen is the reactive one, but fluorine is even more reactive! This colorless, poisonous gas is an extremely powerful oxidizer that was considered for use as rocket propellant because it releases so much energy when it reacts. It's similar in shape to water but far more dangerous. Oxygen difluoride must be handled with extreme care in specialized equipment.",
                 properties: [
-                    "Colorless gas",
-                    "Strong oxidizer",
-                    "Toxic",
-                    "Rocket propellant"
+                    "Colorless, poisonous gas",
+                    "Extremely powerful oxidizing agent",
+                    "Considered for rocket propellant",
+                    "More reactive than oxygen alone",
+                    "Highly toxic - even small amounts dangerous",
+                    "Bent molecular shape like water",
+                    "Reacts violently with most materials",
+                    "Unstable - decomposes easily",
+                    "Used in specialized chemical synthesis",
+                    "Must be stored at low temperatures"
                 ],
                 image: "🚀"
             }
@@ -813,12 +891,18 @@ const LESSONS = [
                 formula: "N₂",
                 composition: { N: 2 },
                 bonds: [[0, 1]],
-                description: "Nitrogen makes up 78% of Earth's atmosphere.",
+                description: "Nitrogen gas makes up an incredible 78% of the air you're breathing right now - it's by far the most abundant gas in Earth's atmosphere! Despite being all around us, nitrogen is quite unreactive due to its very strong triple bond. This \"laziness\" makes it perfect for preserving food - potato chip bags are filled with nitrogen to prevent staleness. Nitrogen is also essential for life: all proteins and DNA contain nitrogen atoms, though plants and animals can't use atmospheric nitrogen directly.",
                 properties: [
-                    "Most abundant in air",
-                    "Colorless and odorless",
-                    "Relatively unreactive",
-                    "Used to preserve food"
+                    "78% of Earth's atmosphere",
+                    "Colorless, odorless, and tasteless gas",
+                    "Has strong triple bond (N≡N)",
+                    "Relatively unreactive under normal conditions",
+                    "Used to preserve packaged foods",
+                    "Essential element for all living things",
+                    "Must be \"fixed\" for plants to use it",
+                    "Converted to ammonia for fertilizers",
+                    "Used to freeze food instantly (liquid nitrogen)",
+                    "Non-toxic - we breathe it constantly"
                 ],
                 image: "💨"
             },
@@ -827,12 +911,18 @@ const LESSONS = [
                 formula: "O₂",
                 composition: { O: 2 },
                 bonds: [[0, 1]],
-                description: "Oxygen gas is what we breathe. It makes up 21% of Earth's atmosphere.",
+                description: "Oxygen gas makes up 21% of Earth's atmosphere and is absolutely essential for almost all life on our planet! Every breath you take brings oxygen into your lungs, where it's transported by your blood to every cell in your body to help convert food into energy. Oxygen is also what makes fire burn - without oxygen, flames cannot exist. Interestingly, oxygen gas is slightly magnetic and pale blue when liquified, and it was only discovered in the 1770s despite being all around us!",
                 properties: [
-                    "21% of atmosphere",
-                    "Necessary for respiration",
-                    "Supports combustion",
-                    "Slightly magnetic"
+                    "21% of Earth's atmosphere",
+                    "Absolutely necessary for respiration",
+                    "Required for fire to burn",
+                    "Pale blue as liquid, colorless as gas",
+                    "Slightly magnetic (paramagnetic)",
+                    "Discovered independently by Priestley and Scheele",
+                    "Produced by plants during photosynthesis",
+                    "Forms ozone (O₃) in upper atmosphere",
+                    "Used in hospitals for medical treatment",
+                    "Essential for most aerobic life forms"
                 ],
                 image: "🌬️"
             },
@@ -841,12 +931,18 @@ const LESSONS = [
                 formula: "Ar",
                 composition: { Ar: 1 },
                 bonds: [],
-                description: "Argon is a noble gas that makes up 1% of Earth's atmosphere.",
+                description: "Argon is a noble gas that makes up about 1% of Earth's atmosphere - that makes it the third most abundant gas after nitrogen and oxygen! As a noble gas, argon is completely unreactive and never forms compounds under normal conditions. This chemical laziness makes it perfect for protecting things from oxygen: argon is used to fill light bulbs to prevent the filament from burning out, to preserve old documents, and to create inert atmospheres in welding. Its name comes from the Greek word \"argos,\" meaning \"lazy\" or \"inactive\"!",
                 properties: [
-                    "Third most abundant in air",
-                    "Completely unreactive",
-                    "Used in light bulbs",
-                    "Colorless and odorless"
+                    "Third most abundant gas in air (0.93%)",
+                    "Completely unreactive noble gas",
+                    "Used to fill incandescent light bulbs",
+                    "Colorless, odorless, and tasteless",
+                    "Protects materials from oxygen damage",
+                    "Used in welding to shield hot metal",
+                    "Name means \"lazy\" in Greek",
+                    "Discovered in 1894 by Rayleigh and Ramsay",
+                    "Produced by radioactive decay of potassium",
+                    "Used in neon signs for blue color"
                 ],
                 image: "💡"
             },
@@ -855,12 +951,18 @@ const LESSONS = [
                 formula: "CO₂",
                 composition: { C: 1, O: 2 },
                 bonds: [[0, 1], [0, 2]],
-                description: "Carbon dioxide is what we exhale. Plants use it for photosynthesis.",
+                description: "Carbon dioxide is a critical molecule in Earth's life cycle - you exhale it with every breath, and plants absorb it to make food through photosynthesis! While it makes up only about 0.04% of our atmosphere, it's incredibly important as a greenhouse gas that helps keep Earth warm enough for life. However, too much CO₂ from burning fossil fuels is causing climate change. Carbon dioxide is also what makes soda fizzy, dry ice smoky, and fire extinguishers work!",
                 properties: [
-                    "0.04% of atmosphere",
-                    "Greenhouse gas",
-                    "Plants need it",
-                    "We exhale it"
+                    "About 0.04% of atmosphere (but increasing)",
+                    "Important greenhouse gas - traps heat",
+                    "Essential for plant photosynthesis",
+                    "Produced when we breathe out",
+                    "Makes carbonated drinks fizzy",
+                    "Dry ice is solid carbon dioxide",
+                    "Used in fire extinguishers",
+                    "Heavier than air - sinks to ground",
+                    "Dissolved in oceans - affects ocean pH",
+                    "Rising levels contribute to climate change"
                 ],
                 image: "☁️"
             },
@@ -869,12 +971,18 @@ const LESSONS = [
                 formula: "O₃",
                 composition: { O: 3 },
                 bonds: [[0, 1], [1, 2]],
-                description: "Ozone protects Earth from harmful UV radiation in the atmosphere.",
+                description: "Ozone is Earth's natural sunscreen - a layer of this molecule high in the stratosphere protects all life on Earth from the Sun's harmful ultraviolet radiation! Ozone is made of three oxygen atoms (instead of the usual two) and has a distinctive sharp smell - you might smell it after lightning strikes or near electric motors. While ozone high in the atmosphere protects us, ozone at ground level is a pollutant that can harm our lungs. The \"ozone hole\" discovered in the 1980s led to a worldwide ban on chemicals that were destroying this protective layer.",
                 properties: [
-                    "Forms protective layer",
-                    "Blue gas with sharp smell",
-                    "Protects from UV rays",
-                    "Found in stratosphere"
+                    "Protective layer in stratosphere (15-35 km up)",
+                    "Pale blue gas with sharp, clean smell",
+                    "Blocks harmful UV radiation from Sun",
+                    "Made of three oxygen atoms (O₃)",
+                    "Created by UV light hitting O₂ molecules",
+                    "Smells like fresh air after thunderstorms",
+                    "Ground-level ozone is an air pollutant",
+                    "CFCs damaged ozone layer (now banned)",
+                    "Ozone layer is slowly recovering",
+                    "Very reactive and unstable molecule"
                 ],
                 image: "🛡️"
             }
