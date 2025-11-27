@@ -148,7 +148,11 @@ class Molecule {
         const formula = this.data.formula;
 
         // Determine molecular structure based on composition and chemistry
-        if (atoms.length === 2) {
+        if (atoms.length === 1) {
+            // Single atom molecules (noble gases like Argon)
+            atoms[0].x = this.centerX;
+            atoms[0].y = this.centerY;
+        } else if (atoms.length === 2) {
             // Diatomic molecules: H2, O2, CO, HCl, NaCl
             atoms[0].x = this.centerX - BOND_DISTANCE / 2;
             atoms[0].y = this.centerY;
