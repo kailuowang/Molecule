@@ -16,7 +16,7 @@ const app = {
 // Constants
 const ATOM_RADIUS = 25;
 const BOND_DISTANCE = 80;
-const REACTION_DISTANCE = 150; // Increased for easier reactions
+const REACTION_DISTANCE = 80; // Distance for molecule detection
 const FRICTION = 0.95;
 const BOUNCE = 0.7;
 
