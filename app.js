@@ -602,6 +602,9 @@ function onMouseMove(e) {
 function onMouseUp(e) {
     app.atoms.forEach(atom => atom.isDragging = false);
     app.selectedAtom = null;
+
+    // Force immediate reaction check by resetting cooldown, then check
+    app.lastReactionCheck = 0;
     checkReactions();
 }
 
