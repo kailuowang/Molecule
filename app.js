@@ -729,6 +729,14 @@ function onCanvasClick(e) {
             return;
         }
     }
+
+    // Check if clicking an atom for element info
+    for (let atom of app.atoms) {
+        if (atom.contains(x, y)) {
+            showElementInfo(atom);
+            return;
+        }
+    }
 }
 
 function onCanvasDoubleClick(e) {
@@ -1008,6 +1016,33 @@ function showMoleculeInfo(data) {
         <p><strong>Properties:</strong></p>
         <ul>
             ${data.properties.map(p => `<li>${p}</li>`).join('')}
+        </ul>
+    `;
+
+    document.getElementById('molecule-info').classList.remove('hidden');
+}
+
+function showElementInfo(atom) {
+    const elementData = ELEMENTS[atom.element];
+
+    if (!elementData) {
+        console.warn(`No data found for element: ${atom.element}`);
+        return;
+    }
+
+    document.getElementById('molecule-name').textContent = elementData.name;
+    document.getElementById('molecule-formula').innerHTML = `<strong>Symbol:</strong> ${elementData.symbol}`;
+
+    const imageDiv = document.getElementById('molecule-image');
+    imageDiv.innerHTML = `<div class="molecule-emoji">${elementData.image}</div>`;
+
+    const propsDiv = document.getElementById('molecule-properties');
+    propsDiv.innerHTML = `
+        <p><strong>Description:</strong></p>
+        <p>${elementData.description}</p>
+        <p><strong>Properties:</strong></p>
+        <ul>
+            ${elementData.properties.map(p => `<li>${p}</li>`).join('')}
         </ul>
     `;
 
