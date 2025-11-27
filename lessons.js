@@ -205,7 +205,7 @@ const LESSONS = [
                 name: "Ethane",
                 formula: "C₂H₆",
                 composition: { C: 2, H: 6 },
-                bonds: [[0, 1], [0, 2], [0, 3], [0, 6], [6, 4], [6, 5]],
+                bonds: [[0, 1], [0, 2], [0, 3], [0, 4], [1, 5], [1, 6], [1, 7]],
                 description: "Ethane is the second simplest hydrocarbon, containing two carbon atoms bonded together with six hydrogen atoms surrounding them. It's found in natural gas and petroleum. When ethane is heated and broken apart (a process called cracking), it forms ethylene, which is used to make plastics like polyethylene - the plastic in bags, bottles, and toys. Ethane burns cleanly and is used as a refrigerant and fuel.",
                 properties: [
                     "Colorless, odorless gas",
@@ -237,7 +237,7 @@ const LESSONS = [
                 name: "Ammonia",
                 formula: "NH₃",
                 composition: { N: 1, H: 3 },
-                bonds: [[0, 3], [1, 3], [2, 3]],
+                bonds: [[0, 1], [0, 2], [0, 3]],
                 description: "Ammonia has a very strong, sharp smell that you might recognize from some cleaning products. It's one of the most important chemicals in agriculture - farmers use ammonia-based fertilizers to help crops grow by providing nitrogen that plants need. Your body also produces small amounts of ammonia as a waste product. Ammonia has an unusual pyramid shape with the nitrogen atom at the top and three hydrogen atoms forming the base.",
                 properties: [
                     "Strong, pungent, suffocating smell",
@@ -317,7 +317,7 @@ const LESSONS = [
                 name: "Hydrazine",
                 formula: "N₂H₄",
                 composition: { N: 2, H: 4 },
-                bonds: [[0, 4], [1, 4], [4, 5], [2, 5], [3, 5]],
+                bonds: [[0, 1], [0, 2], [0, 3], [1, 4], [1, 5]],
                 description: "Hydrazine is a powerful rocket fuel that helps launch spacecraft and satellites into orbit. It's similar to ammonia but with two nitrogen atoms bonded together instead of one. When hydrazine burns, it releases a huge amount of energy very quickly - perfect for rockets! However, hydrazine is very dangerous: it's toxic, corrosive, and can explode. Only trained professionals handle it with special protective equipment. It's also used in some industrial processes and to treat water in power plants.",
                 properties: [
                     "Highly toxic and corrosive liquid",
@@ -390,7 +390,7 @@ const LESSONS = [
                 name: "Sodium Hydroxide",
                 formula: "NaOH",
                 composition: { Na: 1, O: 1, H: 1 },
-                bonds: [[0, 2], [1, 2]],
+                bonds: [[0, 1], [1, 2]],
                 description: "Sodium hydroxide, also called lye or caustic soda, is the opposite of an acid - it's a strong base. People have used it for centuries to make soap by mixing it with fats and oils. Sodium hydroxide is extremely caustic, meaning it can burn skin and dissolve organic materials like hair and grease - that's why it's in drain cleaners! It's a white solid that dissolves in water and gets very hot. Always handle with extreme care!",
                 properties: [
                     "Very strong base (pH around 14)",
@@ -496,7 +496,7 @@ const LESSONS = [
                 name: "Sulfur Trioxide",
                 formula: "SO₃",
                 composition: { S: 1, O: 3 },
-                bonds: [[0, 1], [1, 2], [2, 0]],
+                bonds: [[0, 1], [0, 2], [0, 3]],
                 description: "Sulfur trioxide is a highly reactive compound that's the main ingredient needed to make sulfuric acid - one of the world's most important industrial chemicals. It reacts violently with water, releasing lots of heat and forming sulfuric acid immediately. In nature, sulfur trioxide forms in the atmosphere from sulfur dioxide and contributes to acid rain. It exists as a colorless liquid or white solid, and it's so reactive that it must be handled with extreme care.",
                 properties: [
                     "Highly reactive and corrosive",
@@ -516,7 +516,7 @@ const LESSONS = [
                 name: "Sulfuric Acid",
                 formula: "H₂SO₄",
                 composition: { H: 2, S: 1, O: 4 },
-                bonds: [[0, 2], [1, 2], [2, 6], [3, 6], [4, 6], [5, 6]],
+                bonds: [[0, 3], [2, 3], [1, 4], [2, 4], [2, 5], [2, 6]],
                 description: "Sulfuric acid is called the \"king of chemicals\" because it's the most produced chemical in the world! Industries use it to make fertilizers, refine oil, process metals, and manufacture countless other products. It's one of the strongest acids and is extremely corrosive - it can burn through skin, cloth, and many materials instantly. The acid in car batteries is sulfuric acid. Despite being dangerous, it's absolutely essential for modern industry and agriculture.",
                 properties: [
                     "Strongest common acid (very low pH)",
@@ -562,7 +562,7 @@ const LESSONS = [
                 name: "Methanol",
                 formula: "CH₃OH",
                 composition: { C: 1, H: 4, O: 1 },
-                bonds: [[0, 1], [0, 2], [0, 3], [0, 4], [4, 5]],
+                bonds: [[0, 1], [0, 2], [0, 3], [0, 5], [5, 4]],
                 description: "Methanol is the simplest alcohol, also called wood alcohol because it was once made by heating wood. It's a clear liquid that looks and smells somewhat like drinking alcohol, but it's extremely poisonous - even small amounts can cause blindness or death! Methanol is used as antifreeze, fuel for racing cars, and to make other chemicals like formaldehyde. It's also being developed as a cleaner-burning fuel alternative to gasoline.",
                 properties: [
                     "Colorless liquid with faint alcohol smell",
@@ -582,7 +582,7 @@ const LESSONS = [
                 name: "Ethanol",
                 formula: "C₂H₅OH",
                 composition: { C: 2, H: 6, O: 1 },
-                bonds: [[0, 1], [0, 2], [0, 3], [0, 6], [6, 4], [6, 5], [6, 7], [7, 8]],
+                bonds: [[0, 1], [0, 2], [0, 3], [0, 4], [1, 5], [1, 6], [1, 8], [8, 7]],
                 description: "Ethanol is the type of alcohol found in beer, wine, and spirits that adults drink. It's made by yeast fermenting sugars from fruits, grains, or vegetables. Besides being in alcoholic beverages, ethanol is used as hand sanitizer (kills germs), biofuel (E85 gas), and in medicines. Pure ethanol is colorless with a characteristic smell. While safer than methanol, drinking too much ethanol is still dangerous and affects the brain and body.",
                 properties: [
                     "Alcohol found in alcoholic beverages",
@@ -602,7 +602,7 @@ const LESSONS = [
                 name: "Dimethyl Ether",
                 formula: "CH₃OCH₃",
                 composition: { C: 2, H: 6, O: 1 },
-                bonds: [[0, 1], [0, 2], [0, 3], [0, 6], [6, 7], [7, 4], [7, 5], [7, 8]],
+                bonds: [[0, 8], [1, 8], [0, 2], [0, 3], [0, 4], [1, 5], [1, 6], [1, 7]],
                 description: "Dimethyl ether (DME) is an interesting molecule - it has the same atoms as ethanol (C₂H₆O) but they're arranged differently, making it a gas instead of a liquid! It has a slightly sweet smell and is used as a propellant in aerosol spray cans like hairspray and deodorant. DME is also being developed as a clean diesel fuel alternative because it burns without producing soot. It's non-toxic and biodegradable, making it environmentally friendly.",
                 properties: [
                     "Colorless gas at room temperature",
@@ -636,7 +636,7 @@ const LESSONS = [
                 name: "Acetic Acid",
                 formula: "CH₃COOH",
                 composition: { C: 2, H: 4, O: 2 },
-                bonds: [[0, 1], [0, 2], [0, 3], [0, 4], [4, 5], [4, 6], [6, 7]],
+                bonds: [[0, 1], [0, 2], [0, 3], [0, 4], [1, 6], [1, 7], [7, 5]],
                 description: "Acetic acid is what gives vinegar its sour taste and sharp smell! When you eat vinegar on your salad or fish and chips, you're tasting acetic acid. It's made by bacteria fermenting alcohol in a two-step process - first yeast makes alcohol from sugar, then special bacteria convert the alcohol into acetic acid. Vinegar is typically 4-8% acetic acid mixed with water. Pure acetic acid is called glacial acetic acid because it freezes into ice-like crystals.",
                 properties: [
                     "Main component of vinegar (4-8% solution)",
@@ -669,7 +669,7 @@ const LESSONS = [
                 name: "Phosphine",
                 formula: "PH₃",
                 composition: { P: 1, H: 3 },
-                bonds: [[0, 3], [1, 3], [2, 3]],
+                bonds: [[0, 1], [0, 2], [0, 3]],
                 description: "Phosphine is a highly toxic gas with a distinctive fishy or garlic-like smell. It's similar in structure to ammonia (NH₃) but with phosphorus instead of nitrogen. Phosphine occurs naturally in swamps from decaying organic matter and some scientists think it might even exist on Venus! It's used as a fumigant to kill pests in stored grain. Recently, scientists discovered phosphine in Venus's atmosphere, which sparked excitement because it could be a sign of life!",
                 properties: [
                     "Colorless, highly toxic gas",
@@ -689,7 +689,7 @@ const LESSONS = [
                 name: "Phosphoric Acid",
                 formula: "H₃PO₄",
                 composition: { H: 3, P: 1, O: 4 },
-                bonds: [[0, 4], [1, 4], [2, 4], [4, 5], [4, 6], [4, 7], [5, 3]],
+                bonds: [[0, 4], [3, 4], [1, 5], [3, 5], [2, 6], [3, 6], [3, 7]],
                 description: "Phosphoric acid is the tangy ingredient that gives cola drinks their sharp taste! It's a weak acid that's much safer than strong acids like sulfuric acid. Farmers use huge amounts of phosphoric acid to make fertilizers that help plants grow strong roots. It's also used to remove rust from metal and in many foods as a flavoring and preservative. Your body needs phosphorus (from phosphoric acid compounds) for strong bones and teeth!",
                 properties: [
                     "Gives cola drinks their tangy taste",
