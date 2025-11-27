@@ -8,7 +8,12 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage"
   },
-  "keywords": ["chemistry", "education", "molecules", "interactive"],
+  "keywords": [
+    "chemistry",
+    "education",
+    "molecules",
+    "interactive"
+  ],
   "author": "",
   "license": "MIT",
   "devDependencies": {

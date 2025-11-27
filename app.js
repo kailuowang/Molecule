@@ -668,6 +668,7 @@ function checkReactions() {
 
     const freeAtoms = app.atoms.filter(a => !a.moleculeId);
 
+    // First, try to form molecules from only free atoms
     for (let moleculeData of lesson.molecules) {
         const composition = moleculeData.composition;
         const foundAtoms = findAtomsForMolecule(freeAtoms, composition);
@@ -677,6 +678,38 @@ function checkReactions() {
             app.discoveredMolecules.add(moleculeData.name);
             updateMoleculeList();
             return true; // Found a molecule
+        }
+    }
+
+    // Second, try to expand existing molecules by adding free atoms
+    for (let molecule of app.molecules) {
+        const moleculeAtoms = molecule.atoms;
+        const candidateAtoms = [...moleculeAtoms, ...freeAtoms];
+
+        for (let moleculeData of lesson.molecules) {
+            const composition = moleculeData.composition;
+
+            // Skip if this is the same molecule type we already have
+            if (molecule.data.name === moleculeData.name) {
+                continue;
+            }
+
+            const foundAtoms = findAtomsForMolecule(candidateAtoms, composition);
+
+            // Check if found atoms include atoms from the existing molecule AND free atoms
+            if (foundAtoms) {
+                const hasExistingAtoms = foundAtoms.some(a => a.moleculeId === molecule.id);
+                const hasFreeAtoms = foundAtoms.some(a => !a.moleculeId);
+
+                if (hasExistingAtoms && hasFreeAtoms) {
+                    // Break the old molecule and create the new one
+                    breakMoleculeForExpansion(molecule);
+                    createMolecule(foundAtoms, moleculeData);
+                    app.discoveredMolecules.add(moleculeData.name);
+                    updateMoleculeList();
+                    return true; // Found a molecule expansion
+                }
+            }
         }
     }
 
@@ -812,6 +845,15 @@ function breakMolecule(molecule) {
 
     // Prevent immediate re-sticking by setting a longer cooldown (1 second)
     app.lastReactionCheck = Date.now() + 1000; // Add 1000ms to current time
+}
+
+function breakMoleculeForExpansion(molecule) {
+    // Quietly break molecule for expansion - no velocity, no cooldown
+    molecule.atoms.forEach(atom => {
+        atom.moleculeId = null;
+    });
+
+    app.molecules = app.molecules.filter(m => m.id !== molecule.id);
 }
 
 function showMoleculeInfo(data) {
