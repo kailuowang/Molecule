@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Molecule Maker - Chemistry for Kids</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <header>
+            <h1>🧪 Molecule Maker</h1>
+            <div id="lesson-selector">
+                <label>Choose a Lesson:</label>
+                <select id="lesson-select"></select>
+            </div>
+        </header>
+
+        <main>
+            <div id="game-area">
+                <canvas id="canvas"></canvas>
+                <div id="hint">💡 Drag atoms close together to make molecules! Click to view info. Double-click to break!</div>
+                <div id="controls">
+                    <button id="reset-btn">🔄 Reset Atoms</button>
+                    <button id="clear-btn">🗑️ Clear All</button>
+                </div>
+            </div>
+
+            <aside id="sidebar">
+                <div id="available-molecules">
+                    <h2>📋 Molecules to Discover</h2>
+                    <div id="molecule-list"></div>
+                </div>
+
+                <div id="molecule-info" class="hidden">
+                    <button id="close-info">✕</button>
+                    <h2 id="molecule-name"></h2>
+                    <div id="molecule-formula"></div>
+                    <div id="molecule-image"></div>
+                    <div id="molecule-properties"></div>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <script src="lessons.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
