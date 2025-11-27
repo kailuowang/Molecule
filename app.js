@@ -714,6 +714,51 @@ function checkReactions() {
         }
     }
 
+    // Third, try to combine two molecules that are close together
+    for (let i = 0; i < app.molecules.length; i++) {
+        for (let j = i + 1; j < app.molecules.length; j++) {
+            const mol1 = app.molecules[i];
+            const mol2 = app.molecules[j];
+
+            // Check if molecules are close enough
+            const dist = Math.hypot(mol1.centerX - mol2.centerX, mol1.centerY - mol2.centerY);
+            if (dist > REACTION_DISTANCE * 2) {
+                continue; // Too far apart
+            }
+
+            // Combine atoms from both molecules
+            const combinedAtoms = [...mol1.atoms, ...mol2.atoms];
+
+            for (let moleculeData of lesson.molecules) {
+                const composition = moleculeData.composition;
+
+                // Skip if this is the same as either existing molecule
+                if (moleculeData.name === mol1.data.name || moleculeData.name === mol2.data.name) {
+                    continue;
+                }
+
+                const foundAtoms = findAtomsForMolecule(combinedAtoms, composition);
+
+                // Check if this uses ALL atoms from BOTH molecules
+                if (foundAtoms) {
+                    const mol1Atoms = foundAtoms.filter(a => a.moleculeId === mol1.id);
+                    const mol2Atoms = foundAtoms.filter(a => a.moleculeId === mol2.id);
+
+                    // Only combine if ALL atoms from both molecules are used
+                    if (mol1Atoms.length === mol1.atoms.length && mol2Atoms.length === mol2.atoms.length) {
+                        // Break both molecules and create the new one
+                        breakMoleculeForExpansion(mol1);
+                        breakMoleculeForExpansion(mol2);
+                        createMolecule(foundAtoms, moleculeData);
+                        app.discoveredMolecules.add(moleculeData.name);
+                        updateMoleculeList();
+                        return true; // Found a molecule combination
+                    }
+                }
+            }
+        }
+    }
+
     return false; // No molecule found
 }
 
