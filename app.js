@@ -16,7 +16,7 @@ const app = {
 // Constants
 const ATOM_RADIUS = 25;
 const BOND_DISTANCE = 80;
-const REACTION_DISTANCE = 100; // Increased for easier reactions
+const REACTION_DISTANCE = 150; // Increased for easier reactions
 const FRICTION = 0.95;
 const BOUNCE = 0.7;
 
@@ -609,9 +609,26 @@ function onMouseUp(e) {
     app.atoms.forEach(atom => atom.isDragging = false);
     app.selectedAtom = null;
 
-    // Force immediate reaction check by resetting cooldown, then check
+    // Force immediate reaction check after a tiny delay to let atoms settle
+    // Keep checking until no more molecules can be formed
     app.lastReactionCheck = 0;
-    checkReactions();
+    setTimeout(() => {
+        checkAllReactions();
+    }, 50); // 50ms delay to allow atoms to settle
+}
+
+function checkAllReactions() {
+    // Check if we're still in cooldown period (e.g., after breaking a molecule)
+    const now = Date.now();
+    if (app.lastReactionCheck > now) {
+        return; // Still in cooldown, don't check
+    }
+
+    // Keep checking for reactions until no more molecules can be formed
+    let foundMolecule = false;
+    do {
+        foundMolecule = checkReactions();
+    } while (foundMolecule);
 }
 
 function onCanvasClick(e) {
@@ -646,7 +663,7 @@ function checkReactions() {
     const lesson = app.currentLesson;
 
     if (!lesson) {
-        return;
+        return false;
     }
 
     const freeAtoms = app.atoms.filter(a => !a.moleculeId);
@@ -659,9 +676,11 @@ function checkReactions() {
             createMolecule(foundAtoms, moleculeData);
             app.discoveredMolecules.add(moleculeData.name);
             updateMoleculeList();
-            return; // Only create one molecule at a time
+            return true; // Found a molecule
         }
     }
+
+    return false; // No molecule found
 }
 
 function findAtomsForMolecule(atoms, composition) {
@@ -683,62 +702,91 @@ function findAtomsForMolecule(atoms, composition) {
         }
     }
 
-    // Find a cluster of atoms that are all close to each other
-    const needed = [];
+    // Build list of needed atoms with their elements
+    const neededElements = [];
     for (let element in composition) {
         for (let i = 0; i < composition[element]; i++) {
-            needed.push(element);
+            neededElements.push(element);
         }
     }
 
-    // Start with any atom that matches one of the needed elements
     if (atoms.length === 0) return null;
 
-    const startAtom = atoms.find(a => needed.includes(a.element));
-    if (!startAtom) {
-        return null;
+    // Try each possible starting atom
+    const candidateAtoms = atoms.filter(a => neededElements.includes(a.element));
+
+    for (let startAtom of candidateAtoms) {
+        const cluster = findCluster(startAtom, atoms, neededElements);
+        if (cluster && cluster.length === neededElements.length) {
+            // Verify we have the right composition
+            const clusterComposition = {};
+            cluster.forEach(atom => {
+                clusterComposition[atom.element] = (clusterComposition[atom.element] || 0) + 1;
+            });
+
+            let matches = true;
+            for (let element in composition) {
+                if (clusterComposition[element] !== composition[element]) {
+                    matches = false;
+                    break;
+                }
+            }
+
+            if (matches) {
+                return cluster;
+            }
+        }
     }
 
-    const found = [startAtom];
-    const remaining = [...needed];
-    // Remove only the first occurrence of the start atom's element
+    return null;
+}
+
+function findCluster(startAtom, allAtoms, neededElements) {
+    // Find a cluster of atoms where each atom is within REACTION_DISTANCE of at least one other atom in the cluster
+    const cluster = [startAtom];
+    const remaining = [...neededElements];
     const startIdx = remaining.indexOf(startAtom.element);
     if (startIdx !== -1) {
         remaining.splice(startIdx, 1);
     }
 
-    while (remaining.length > 0) {
-        let closestAtom = null;
-        let closestDist = Infinity;
-        let closestIdx = -1;
+    // Keep adding atoms that are close to ANY atom already in the cluster
+    let addedAtom = true;
+    while (addedAtom && remaining.length > 0) {
+        addedAtom = false;
 
-        // Look for the closest atom of any needed type to any already found atom
-        for (let foundAtom of found) {
-            for (let i = 0; i < remaining.length; i++) {
-                const element = remaining[i];
-                for (let atom of atoms) {
-                    if (found.includes(atom)) continue;
-                    if (atom.element !== element) continue;
+        for (let i = remaining.length - 1; i >= 0; i--) {
+            const element = remaining[i];
 
-                    const dist = Math.hypot(atom.x - foundAtom.x, atom.y - foundAtom.y);
-                    if (dist < REACTION_DISTANCE && dist < closestDist) {
-                        closestAtom = atom;
-                        closestDist = dist;
-                        closestIdx = i;
+            // Find atoms of this element that aren't already in cluster
+            const candidates = allAtoms.filter(a =>
+                a.element === element && !cluster.includes(a)
+            );
+
+            // Check if any candidate is close to any atom in the cluster
+            for (let candidate of candidates) {
+                let isClose = false;
+                for (let clusterAtom of cluster) {
+                    const dist = Math.hypot(candidate.x - clusterAtom.x, candidate.y - clusterAtom.y);
+                    if (dist < REACTION_DISTANCE) {
+                        isClose = true;
+                        break;
                     }
                 }
+
+                if (isClose) {
+                    cluster.push(candidate);
+                    remaining.splice(i, 1);
+                    addedAtom = true;
+                    break;
+                }
             }
-        }
 
-        if (!closestAtom) {
-            return null; // Can't find a close enough atom
+            if (addedAtom) break;
         }
-
-        found.push(closestAtom);
-        remaining.splice(closestIdx, 1);
     }
 
-    return found.length === needed.length ? found : null;
+    return remaining.length === 0 ? cluster : null;
 }
 
 function createMolecule(atoms, data) {
@@ -762,8 +810,8 @@ function breakMolecule(molecule) {
 
     app.molecules = app.molecules.filter(m => m.id !== molecule.id);
 
-    // Prevent immediate re-sticking by setting a cooldown
-    app.lastReactionCheck = Date.now();
+    // Prevent immediate re-sticking by setting a longer cooldown (1 second)
+    app.lastReactionCheck = Date.now() + 1000; // Add 1000ms to current time
 }
 
 function showMoleculeInfo(data) {
