@@ -292,12 +292,60 @@ class Molecule {
                 });
             }
         } else {
-            // Default circular arrangement for other molecules
-            const angle = (Math.PI * 2) / atoms.length;
-            atoms.forEach((atom, i) => {
-                atom.x = this.centerX + Math.cos(angle * i) * BOND_DISTANCE;
-                atom.y = this.centerY + Math.sin(angle * i) * BOND_DISTANCE;
+            // For larger molecules (6+ atoms), try to arrange based on structure
+            const elementCounts = {};
+            atoms.forEach(atom => {
+                elementCounts[atom.element] = (elementCounts[atom.element] || 0) + 1;
             });
+
+            // Try to identify central atoms (elements with count 1 or 2)
+            let centerAtoms = [];
+            let peripheralAtoms = [];
+
+            for (let atom of atoms) {
+                const count = elementCounts[atom.element];
+                if (count <= 2 && !['H', 'F', 'Cl', 'Br'].includes(atom.element)) {
+                    centerAtoms.push(atom);
+                } else {
+                    peripheralAtoms.push(atom);
+                }
+            }
+
+            if (centerAtoms.length > 0 && peripheralAtoms.length > 0) {
+                // Arrange center atoms in a line
+                if (centerAtoms.length === 1) {
+                    centerAtoms[0].x = this.centerX;
+                    centerAtoms[0].y = this.centerY;
+                } else if (centerAtoms.length === 2) {
+                    centerAtoms[0].x = this.centerX - BOND_DISTANCE / 2;
+                    centerAtoms[0].y = this.centerY;
+                    centerAtoms[1].x = this.centerX + BOND_DISTANCE / 2;
+                    centerAtoms[1].y = this.centerY;
+                } else {
+                    // Multiple center atoms - arrange in line
+                    const spacing = BOND_DISTANCE;
+                    const totalWidth = (centerAtoms.length - 1) * spacing;
+                    centerAtoms.forEach((atom, i) => {
+                        atom.x = this.centerX - totalWidth / 2 + i * spacing;
+                        atom.y = this.centerY;
+                    });
+                }
+
+                // Arrange peripheral atoms around center atoms
+                const angleStep = (Math.PI * 2) / peripheralAtoms.length;
+                peripheralAtoms.forEach((atom, i) => {
+                    const angle = angleStep * i;
+                    atom.x = this.centerX + Math.cos(angle) * BOND_DISTANCE;
+                    atom.y = this.centerY + Math.sin(angle) * BOND_DISTANCE;
+                });
+            } else {
+                // Fallback: circular arrangement
+                const angle = (Math.PI * 2) / atoms.length;
+                atoms.forEach((atom, i) => {
+                    atom.x = this.centerX + Math.cos(angle * i) * BOND_DISTANCE;
+                    atom.y = this.centerY + Math.sin(angle * i) * BOND_DISTANCE;
+                });
+            }
         }
     }
 
@@ -467,13 +515,51 @@ class Molecule {
                 });
             }
         } else {
-            // Default: connect all atoms
-            for (let i = 0; i < atoms.length; i++) {
-                for (let j = i + 1; j < atoms.length; j++) {
-                    ctx.beginPath();
-                    ctx.moveTo(atoms[i].x, atoms[i].y);
-                    ctx.lineTo(atoms[j].x, atoms[j].y);
-                    ctx.stroke();
+            // For larger molecules, use the bond data from molecule definition
+            if (this.data.bonds && this.data.bonds.length > 0) {
+                this.data.bonds.forEach(bond => {
+                    const [atomIndex1, atomIndex2] = bond;
+                    if (atomIndex1 < atoms.length && atomIndex2 < atoms.length) {
+                        ctx.beginPath();
+                        ctx.moveTo(atoms[atomIndex1].x, atoms[atomIndex1].y);
+                        ctx.lineTo(atoms[atomIndex2].x, atoms[atomIndex2].y);
+                        ctx.stroke();
+                    }
+                });
+            } else {
+                // Fallback: if no bond data, try star pattern (center atom bonded to peripherals)
+                const elementCounts = {};
+                atoms.forEach(atom => {
+                    elementCounts[atom.element] = (elementCounts[atom.element] || 0) + 1;
+                });
+
+                let centerAtom = null;
+                let peripheralAtoms = [];
+
+                for (let atom of atoms) {
+                    if (elementCounts[atom.element] === 1) {
+                        centerAtom = atom;
+                    } else {
+                        peripheralAtoms.push(atom);
+                    }
+                }
+
+                if (centerAtom && peripheralAtoms.length > 0) {
+                    // Star pattern: center bonded to all peripheral atoms
+                    peripheralAtoms.forEach(atom => {
+                        ctx.beginPath();
+                        ctx.moveTo(centerAtom.x, centerAtom.y);
+                        ctx.lineTo(atom.x, atom.y);
+                        ctx.stroke();
+                    });
+                } else {
+                    // Ultimate fallback: circular arrangement
+                    for (let i = 0; i < atoms.length - 1; i++) {
+                        ctx.beginPath();
+                        ctx.moveTo(atoms[i].x, atoms[i].y);
+                        ctx.lineTo(atoms[i + 1].x, atoms[i + 1].y);
+                        ctx.stroke();
+                    }
                 }
             }
         }
