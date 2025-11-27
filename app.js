@@ -696,12 +696,13 @@ function checkReactions() {
 
             const foundAtoms = findAtomsForMolecule(candidateAtoms, composition);
 
-            // Check if found atoms include atoms from the existing molecule AND free atoms
+            // Check if this is a TRUE expansion: ALL atoms from the existing molecule must be used
             if (foundAtoms) {
-                const hasExistingAtoms = foundAtoms.some(a => a.moleculeId === molecule.id);
-                const hasFreeAtoms = foundAtoms.some(a => !a.moleculeId);
+                const existingMoleculeAtoms = foundAtoms.filter(a => a.moleculeId === molecule.id);
+                const freeAtomsUsed = foundAtoms.filter(a => !a.moleculeId);
 
-                if (hasExistingAtoms && hasFreeAtoms) {
+                // Only expand if ALL atoms from the old molecule are included AND at least one free atom is added
+                if (existingMoleculeAtoms.length === moleculeAtoms.length && freeAtomsUsed.length > 0) {
                     // Break the old molecule and create the new one
                     breakMoleculeForExpansion(molecule);
                     createMolecule(foundAtoms, moleculeData);
