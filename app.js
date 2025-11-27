@@ -701,8 +701,11 @@ function checkReactions() {
                 const existingMoleculeAtoms = foundAtoms.filter(a => a.moleculeId === molecule.id);
                 const freeAtomsUsed = foundAtoms.filter(a => !a.moleculeId);
 
-                // Only expand if ALL atoms from the old molecule are included AND at least one free atom is added
-                if (existingMoleculeAtoms.length === moleculeAtoms.length && freeAtomsUsed.length > 0) {
+                // CRITICAL: Only expand if ALL atoms from the old molecule are included AND at least one free atom is added
+                // This prevents breaking a molecule and forming a smaller one with only some of its atoms
+                if (existingMoleculeAtoms.length === moleculeAtoms.length &&
+                    freeAtomsUsed.length > 0 &&
+                    foundAtoms.length === (moleculeAtoms.length + freeAtomsUsed.length)) {
                     // Break the old molecule and create the new one
                     breakMoleculeForExpansion(molecule);
                     createMolecule(foundAtoms, moleculeData);
@@ -744,8 +747,11 @@ function checkReactions() {
                     const mol1Atoms = foundAtoms.filter(a => a.moleculeId === mol1.id);
                     const mol2Atoms = foundAtoms.filter(a => a.moleculeId === mol2.id);
 
-                    // Only combine if ALL atoms from both molecules are used
-                    if (mol1Atoms.length === mol1.atoms.length && mol2Atoms.length === mol2.atoms.length) {
+                    // CRITICAL: Only combine if ALL atoms from both molecules are used and nothing else
+                    // This prevents breaking two molecules and forming a smaller one with only some atoms
+                    if (mol1Atoms.length === mol1.atoms.length &&
+                        mol2Atoms.length === mol2.atoms.length &&
+                        foundAtoms.length === (mol1.atoms.length + mol2.atoms.length)) {
                         // Break both molecules and create the new one
                         breakMoleculeForExpansion(mol1);
                         breakMoleculeForExpansion(mol2);
