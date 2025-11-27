@@ -478,11 +478,13 @@ class Molecule {
             }
         }
 
-        // Draw molecule name
+        // Draw molecule name above the highest atom
+        const highestY = Math.min(...this.atoms.map(a => a.y));
+        const nameY = highestY - ATOM_RADIUS - 15; // Position above the highest atom
         ctx.fillStyle = '#000';
         ctx.font = 'bold 14px Arial';
         ctx.textAlign = 'center';
-        ctx.fillText(this.data.name, this.centerX, this.centerY - 60);
+        ctx.fillText(this.data.name, this.centerX, nameY);
     }
 
     contains(x, y) {
