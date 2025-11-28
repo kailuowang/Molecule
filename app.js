@@ -292,54 +292,11 @@ class Molecule {
                 });
             }
         } else {
-            // For larger molecules (6+ atoms), try to arrange based on structure
-            const elementCounts = {};
-            atoms.forEach(atom => {
-                elementCounts[atom.element] = (elementCounts[atom.element] || 0) + 1;
-            });
-
-            // Try to identify central atoms (elements with count 1 or 2)
-            let centerAtoms = [];
-            let peripheralAtoms = [];
-
-            for (let atom of atoms) {
-                const count = elementCounts[atom.element];
-                if (count <= 2 && !['H', 'F', 'Cl', 'Br'].includes(atom.element)) {
-                    centerAtoms.push(atom);
-                } else {
-                    peripheralAtoms.push(atom);
-                }
-            }
-
-            if (centerAtoms.length > 0 && peripheralAtoms.length > 0) {
-                // Arrange center atoms in a line
-                if (centerAtoms.length === 1) {
-                    centerAtoms[0].x = this.centerX;
-                    centerAtoms[0].y = this.centerY;
-                } else if (centerAtoms.length === 2) {
-                    centerAtoms[0].x = this.centerX - BOND_DISTANCE / 2;
-                    centerAtoms[0].y = this.centerY;
-                    centerAtoms[1].x = this.centerX + BOND_DISTANCE / 2;
-                    centerAtoms[1].y = this.centerY;
-                } else {
-                    // Multiple center atoms - arrange in line
-                    const spacing = BOND_DISTANCE;
-                    const totalWidth = (centerAtoms.length - 1) * spacing;
-                    centerAtoms.forEach((atom, i) => {
-                        atom.x = this.centerX - totalWidth / 2 + i * spacing;
-                        atom.y = this.centerY;
-                    });
-                }
-
-                // Arrange peripheral atoms around center atoms
-                const angleStep = (Math.PI * 2) / peripheralAtoms.length;
-                peripheralAtoms.forEach((atom, i) => {
-                    const angle = angleStep * i;
-                    atom.x = this.centerX + Math.cos(angle) * BOND_DISTANCE;
-                    atom.y = this.centerY + Math.sin(angle) * BOND_DISTANCE;
-                });
+            // For larger molecules (6+ atoms), use bond-based graph layout
+            if (this.data.bonds && this.data.bonds.length > 0) {
+                this.arrangeMoleculeByBonds();
             } else {
-                // Fallback: circular arrangement
+                // Fallback: circular arrangement if no bond data
                 const angle = (Math.PI * 2) / atoms.length;
                 atoms.forEach((atom, i) => {
                     atom.x = this.centerX + Math.cos(angle * i) * BOND_DISTANCE;
@@ -347,6 +304,101 @@ class Molecule {
                 });
             }
         }
+    }
+
+    // Graph-based molecule arrangement using bond connectivity
+    arrangeMoleculeByBonds() {
+        const atoms = this.atoms;
+        const bonds = this.data.bonds;
+
+        // Build adjacency list from bonds
+        const adjacency = new Map();
+        atoms.forEach((_, i) => adjacency.set(i, []));
+        bonds.forEach(([a, b]) => {
+            if (a < atoms.length && b < atoms.length) {
+                adjacency.get(a).push(b);
+                adjacency.get(b).push(a);
+            }
+        });
+
+        // Find the atom with the most connections (likely central)
+        let startAtom = 0;
+        let maxConnections = 0;
+        adjacency.forEach((neighbors, atomIndex) => {
+            if (neighbors.length > maxConnections) {
+                maxConnections = neighbors.length;
+                startAtom = atomIndex;
+            }
+        });
+
+        // BFS to position atoms layer by layer
+        const positioned = new Set();
+        const queue = [startAtom];
+
+        // Position the first atom at center
+        atoms[startAtom].x = this.centerX;
+        atoms[startAtom].y = this.centerY;
+        positioned.add(startAtom);
+
+        while (queue.length > 0) {
+            const currentIndex = queue.shift();
+            const currentAtom = atoms[currentIndex];
+            const neighbors = adjacency.get(currentIndex);
+
+            // Filter to unpositioned neighbors
+            const unpositionedNeighbors = neighbors.filter(n => !positioned.has(n));
+
+            if (unpositionedNeighbors.length === 0) continue;
+
+            // Calculate base angle - try to position neighbors away from already positioned ones
+            let baseAngle = 0;
+            const positionedNeighbors = neighbors.filter(n => positioned.has(n));
+
+            if (positionedNeighbors.length > 0) {
+                // Average angle of positioned neighbors, then go opposite
+                let avgX = 0, avgY = 0;
+                positionedNeighbors.forEach(n => {
+                    avgX += atoms[n].x - currentAtom.x;
+                    avgY += atoms[n].y - currentAtom.y;
+                });
+                baseAngle = Math.atan2(avgY, avgX) + Math.PI; // Opposite direction
+            }
+
+            // Calculate angle spread for unpositioned neighbors
+            const spreadAngle = Math.min(Math.PI * 2 / 3, Math.PI / unpositionedNeighbors.length);
+            const totalSpread = spreadAngle * (unpositionedNeighbors.length - 1);
+            const startAngle = baseAngle - totalSpread / 2;
+
+            unpositionedNeighbors.forEach((neighborIndex, i) => {
+                const angle = startAngle + spreadAngle * i;
+                atoms[neighborIndex].x = currentAtom.x + Math.cos(angle) * BOND_DISTANCE;
+                atoms[neighborIndex].y = currentAtom.y + Math.sin(angle) * BOND_DISTANCE;
+                positioned.add(neighborIndex);
+                queue.push(neighborIndex);
+            });
+        }
+
+        // Handle any disconnected atoms (shouldn't happen with valid bond data)
+        atoms.forEach((atom, i) => {
+            if (!positioned.has(i)) {
+                const angle = (Math.PI * 2 * i) / atoms.length;
+                atom.x = this.centerX + Math.cos(angle) * BOND_DISTANCE;
+                atom.y = this.centerY + Math.sin(angle) * BOND_DISTANCE;
+            }
+        });
+
+        // Recenter the molecule
+        let sumX = 0, sumY = 0;
+        atoms.forEach(atom => {
+            sumX += atom.x;
+            sumY += atom.y;
+        });
+        const offsetX = this.centerX - sumX / atoms.length;
+        const offsetY = this.centerY - sumY / atoms.length;
+        atoms.forEach(atom => {
+            atom.x += offsetX;
+            atom.y += offsetY;
+        });
     }
 
     update(width, height) {

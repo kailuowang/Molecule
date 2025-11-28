@@ -13,7 +13,9 @@
       "Bash(npm test:*)",
       "Bash(npx jest:*)",
       "Bash(npm install:*)",
-      "Bash(open index.html)"
+      "Bash(open index.html)",
+      "Bash(find:*)",
+      "Bash(node -e:*)"
     ],
     "deny": [],
     "ask": []
