@@ -145,9 +145,7 @@ class Molecule {
 
     arrangeMolecule() {
         const atoms = this.atoms;
-        const formula = this.data.formula;
 
-        // Determine molecular structure based on composition and chemistry
         if (atoms.length === 1) {
             // Single atom molecules (noble gases like Argon)
             atoms[0].x = this.centerX;
@@ -158,141 +156,8 @@ class Molecule {
             atoms[0].y = this.centerY;
             atoms[1].x = this.centerX + BOND_DISTANCE / 2;
             atoms[1].y = this.centerY;
-        } else if (atoms.length === 3) {
-            // H2O, CO2, NaOH, or similar
-            if (formula === 'NaOH') {
-                // H-O-Na linear structure
-                const hydrogen = atoms.find(a => a.element === 'H');
-                const oxygen = atoms.find(a => a.element === 'O');
-                const sodium = atoms.find(a => a.element === 'Na');
-
-                oxygen.x = this.centerX;
-                oxygen.y = this.centerY;
-                hydrogen.x = this.centerX - BOND_DISTANCE;
-                hydrogen.y = this.centerY;
-                sodium.x = this.centerX + BOND_DISTANCE;
-                sodium.y = this.centerY;
-            } else {
-                // H2O, CO2: center atom with two peripheral atoms
-                const elementCounts = {};
-                atoms.forEach(atom => {
-                    elementCounts[atom.element] = (elementCounts[atom.element] || 0) + 1;
-                });
-
-                // Find the center atom (the one with count 1 in H2O, CO2, etc.)
-                let centerAtom = null;
-                let peripheralAtoms = [];
-
-                // For H2O: O is center (1 O, 2 H)
-                // For CO2: C is center (1 C, 2 O)
-                for (let atom of atoms) {
-                    if (elementCounts[atom.element] === 1) {
-                        centerAtom = atom;
-                    } else {
-                        peripheralAtoms.push(atom);
-                    }
-                }
-
-                if (centerAtom && peripheralAtoms.length === 2) {
-                    // Star pattern: center bonded to two others
-                    centerAtom.x = this.centerX;
-                    centerAtom.y = this.centerY;
-
-                    const angle1 = Math.PI * 0.75; // 135 degrees
-                    const angle2 = Math.PI * 0.25; // 45 degrees
-
-                    peripheralAtoms[0].x = this.centerX + Math.cos(angle1) * BOND_DISTANCE;
-                    peripheralAtoms[0].y = this.centerY + Math.sin(angle1) * BOND_DISTANCE;
-                    peripheralAtoms[1].x = this.centerX + Math.cos(angle2) * BOND_DISTANCE;
-                    peripheralAtoms[1].y = this.centerY + Math.sin(angle2) * BOND_DISTANCE;
-                }
-            }
-        } else if (atoms.length === 4) {
-            // H2O2 (chain) or NH3 (star)
-            if (formula === 'H₂O₂') {
-                // H-O-O-H chain
-                const hydrogens = atoms.filter(a => a.element === 'H');
-                const oxygens = atoms.filter(a => a.element === 'O');
-
-                oxygens[0].x = this.centerX - BOND_DISTANCE / 2;
-                oxygens[0].y = this.centerY;
-                oxygens[1].x = this.centerX + BOND_DISTANCE / 2;
-                oxygens[1].y = this.centerY;
-                hydrogens[0].x = this.centerX - BOND_DISTANCE * 1.5;
-                hydrogens[0].y = this.centerY - BOND_DISTANCE * 0.5;
-                hydrogens[1].x = this.centerX + BOND_DISTANCE * 1.5;
-                hydrogens[1].y = this.centerY + BOND_DISTANCE * 0.5;
-            } else {
-                // NH3 and other 4-atom molecules - star pattern
-                const elementCounts = {};
-                atoms.forEach(atom => {
-                    elementCounts[atom.element] = (elementCounts[atom.element] || 0) + 1;
-                });
-
-                let centerAtom = null;
-                let peripheralAtoms = [];
-
-                for (let atom of atoms) {
-                    if (elementCounts[atom.element] === 1) {
-                        centerAtom = atom;
-                    } else {
-                        peripheralAtoms.push(atom);
-                    }
-                }
-
-                if (centerAtom && peripheralAtoms.length === 3) {
-                    // Star pattern: center bonded to 3 peripheral atoms
-                    centerAtom.x = this.centerX;
-                    centerAtom.y = this.centerY;
-
-                    const angleStep = (Math.PI * 2) / 3;
-                    peripheralAtoms.forEach((atom, i) => {
-                        const angle = angleStep * i;
-                        atom.x = this.centerX + Math.cos(angle) * BOND_DISTANCE;
-                        atom.y = this.centerY + Math.sin(angle) * BOND_DISTANCE;
-                    });
-                } else {
-                    // Fallback to circular
-                    const angle = (Math.PI * 2) / atoms.length;
-                    atoms.forEach((atom, i) => {
-                        atom.x = this.centerX + Math.cos(angle * i) * BOND_DISTANCE;
-                        atom.y = this.centerY + Math.sin(angle * i) * BOND_DISTANCE;
-                    });
-                }
-            }
-        } else if (atoms.length === 5) {
-            // CH4 - star pattern with center atom
-            const elementCounts = {};
-            atoms.forEach(atom => {
-                elementCounts[atom.element] = (elementCounts[atom.element] || 0) + 1;
-            });
-
-            // Find center atom (the one with count 1)
-            let centerAtom = null;
-            let peripheralAtoms = [];
-
-            for (let atom of atoms) {
-                if (elementCounts[atom.element] === 1) {
-                    centerAtom = atom;
-                } else {
-                    peripheralAtoms.push(atom);
-                }
-            }
-
-            if (centerAtom && (peripheralAtoms.length === 3 || peripheralAtoms.length === 4)) {
-                // Star pattern: center bonded to all peripheral atoms
-                centerAtom.x = this.centerX;
-                centerAtom.y = this.centerY;
-
-                const angleStep = (Math.PI * 2) / peripheralAtoms.length;
-                peripheralAtoms.forEach((atom, i) => {
-                    const angle = angleStep * i;
-                    atom.x = this.centerX + Math.cos(angle) * BOND_DISTANCE;
-                    atom.y = this.centerY + Math.sin(angle) * BOND_DISTANCE;
-                });
-            }
         } else {
-            // For larger molecules (6+ atoms), use bond-based graph layout
+            // For all molecules with 3+ atoms, use bond-based layout if bond data available
             if (this.data.bonds && this.data.bonds.length > 0) {
                 this.arrangeMoleculeByBonds();
             } else {
@@ -431,7 +296,6 @@ class Molecule {
         ctx.strokeStyle = '#666';
         ctx.lineWidth = 4;
 
-        const formula = this.data.formula;
         const atoms = this.atoms;
 
         if (atoms.length === 2) {
@@ -440,134 +304,8 @@ class Molecule {
             ctx.moveTo(atoms[0].x, atoms[0].y);
             ctx.lineTo(atoms[1].x, atoms[1].y);
             ctx.stroke();
-        } else if (atoms.length === 3) {
-            // H2O, CO2, NaOH: center bonded to two others
-            if (formula === 'NaOH') {
-                // H-O-Na linear
-                const hydrogen = atoms.find(a => a.element === 'H');
-                const oxygen = atoms.find(a => a.element === 'O');
-                const sodium = atoms.find(a => a.element === 'Na');
-
-                // H-O
-                ctx.beginPath();
-                ctx.moveTo(hydrogen.x, hydrogen.y);
-                ctx.lineTo(oxygen.x, oxygen.y);
-                ctx.stroke();
-
-                // O-Na
-                ctx.beginPath();
-                ctx.moveTo(oxygen.x, oxygen.y);
-                ctx.lineTo(sodium.x, sodium.y);
-                ctx.stroke();
-            } else {
-                // H2O, CO2: center bonded to two peripheral atoms
-                const elementCounts = {};
-                atoms.forEach(atom => {
-                    elementCounts[atom.element] = (elementCounts[atom.element] || 0) + 1;
-                });
-
-                let centerAtom = null;
-                let peripheralAtoms = [];
-
-                for (let atom of atoms) {
-                    if (elementCounts[atom.element] === 1) {
-                        centerAtom = atom;
-                    } else {
-                        peripheralAtoms.push(atom);
-                    }
-                }
-
-                if (centerAtom && peripheralAtoms.length === 2) {
-                    // Draw bonds from center to each peripheral atom
-                    peripheralAtoms.forEach(atom => {
-                        ctx.beginPath();
-                        ctx.moveTo(centerAtom.x, centerAtom.y);
-                        ctx.lineTo(atom.x, atom.y);
-                        ctx.stroke();
-                    });
-                }
-            }
-        } else if (atoms.length === 4) {
-            // H2O2 (chain) or NH3 (star)
-            if (formula === 'H₂O₂') {
-                // H-O-O-H chain
-                const hydrogens = atoms.filter(a => a.element === 'H');
-                const oxygens = atoms.filter(a => a.element === 'O');
-
-                // H-O
-                ctx.beginPath();
-                ctx.moveTo(hydrogens[0].x, hydrogens[0].y);
-                ctx.lineTo(oxygens[0].x, oxygens[0].y);
-                ctx.stroke();
-
-                // O-O
-                ctx.beginPath();
-                ctx.moveTo(oxygens[0].x, oxygens[0].y);
-                ctx.lineTo(oxygens[1].x, oxygens[1].y);
-                ctx.stroke();
-
-                // O-H
-                ctx.beginPath();
-                ctx.moveTo(oxygens[1].x, oxygens[1].y);
-                ctx.lineTo(hydrogens[1].x, hydrogens[1].y);
-                ctx.stroke();
-            } else {
-                // NH3: star pattern
-                const elementCounts = {};
-                atoms.forEach(atom => {
-                    elementCounts[atom.element] = (elementCounts[atom.element] || 0) + 1;
-                });
-
-                let centerAtom = null;
-                let peripheralAtoms = [];
-
-                for (let atom of atoms) {
-                    if (elementCounts[atom.element] === 1) {
-                        centerAtom = atom;
-                    } else {
-                        peripheralAtoms.push(atom);
-                    }
-                }
-
-                if (centerAtom && peripheralAtoms.length === 3) {
-                    // Draw bonds from center to all 3 peripheral atoms
-                    peripheralAtoms.forEach(atom => {
-                        ctx.beginPath();
-                        ctx.moveTo(centerAtom.x, centerAtom.y);
-                        ctx.lineTo(atom.x, atom.y);
-                        ctx.stroke();
-                    });
-                }
-            }
-        } else if (atoms.length === 5) {
-            // CH4: star pattern
-            const elementCounts = {};
-            atoms.forEach(atom => {
-                elementCounts[atom.element] = (elementCounts[atom.element] || 0) + 1;
-            });
-
-            let centerAtom = null;
-            let peripheralAtoms = [];
-
-            for (let atom of atoms) {
-                if (elementCounts[atom.element] === 1) {
-                    centerAtom = atom;
-                } else {
-                    peripheralAtoms.push(atom);
-                }
-            }
-
-            if (centerAtom && peripheralAtoms.length === 4) {
-                // Draw bonds from center to all peripheral atoms
-                peripheralAtoms.forEach(atom => {
-                    ctx.beginPath();
-                    ctx.moveTo(centerAtom.x, centerAtom.y);
-                    ctx.lineTo(atom.x, atom.y);
-                    ctx.stroke();
-                });
-            }
         } else {
-            // For larger molecules, use the bond data from molecule definition
+            // For all molecules with 3+ atoms, use bond data if available
             if (this.data.bonds && this.data.bonds.length > 0) {
                 this.data.bonds.forEach(bond => {
                     const [atomIndex1, atomIndex2] = bond;
@@ -579,39 +317,12 @@ class Molecule {
                     }
                 });
             } else {
-                // Fallback: if no bond data, try star pattern (center atom bonded to peripherals)
-                const elementCounts = {};
-                atoms.forEach(atom => {
-                    elementCounts[atom.element] = (elementCounts[atom.element] || 0) + 1;
-                });
-
-                let centerAtom = null;
-                let peripheralAtoms = [];
-
-                for (let atom of atoms) {
-                    if (elementCounts[atom.element] === 1) {
-                        centerAtom = atom;
-                    } else {
-                        peripheralAtoms.push(atom);
-                    }
-                }
-
-                if (centerAtom && peripheralAtoms.length > 0) {
-                    // Star pattern: center bonded to all peripheral atoms
-                    peripheralAtoms.forEach(atom => {
-                        ctx.beginPath();
-                        ctx.moveTo(centerAtom.x, centerAtom.y);
-                        ctx.lineTo(atom.x, atom.y);
-                        ctx.stroke();
-                    });
-                } else {
-                    // Ultimate fallback: circular arrangement
-                    for (let i = 0; i < atoms.length - 1; i++) {
-                        ctx.beginPath();
-                        ctx.moveTo(atoms[i].x, atoms[i].y);
-                        ctx.lineTo(atoms[i + 1].x, atoms[i + 1].y);
-                        ctx.stroke();
-                    }
+                // Fallback: connect atoms in sequence
+                for (let i = 0; i < atoms.length - 1; i++) {
+                    ctx.beginPath();
+                    ctx.moveTo(atoms[i].x, atoms[i].y);
+                    ctx.lineTo(atoms[i + 1].x, atoms[i + 1].y);
+                    ctx.stroke();
                 }
             }
         }
