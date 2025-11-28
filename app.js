@@ -1046,7 +1046,22 @@ function findAtomsForMolecule(atoms, composition) {
             }
 
             if (matches) {
-                return cluster;
+                // Sort cluster atoms to match the order expected by bond indices
+                // Bond indices are based on composition order: for { H: 2, S: 1, O: 4 }
+                // the expected order is [H, H, S, O, O, O, O]
+                const sortedCluster = [];
+                const usedAtoms = new Set();
+
+                for (let element in composition) {
+                    const count = composition[element];
+                    const atomsOfElement = cluster.filter(a => a.element === element && !usedAtoms.has(a));
+                    for (let i = 0; i < count; i++) {
+                        sortedCluster.push(atomsOfElement[i]);
+                        usedAtoms.add(atomsOfElement[i]);
+                    }
+                }
+
+                return sortedCluster;
             }
         }
     }
